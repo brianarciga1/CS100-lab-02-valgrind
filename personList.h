@@ -4,15 +4,16 @@
 
 class PersonList{
     private:
-      Person **theList; // array of pointers to person objects
-      int numPeople; // current number of people in theList
-      int capacity; // capacity of theList array
+Person **theList;
+int numPeople; 
+int capacity;
 
-    public:
+public:
         PersonList();
         ~PersonList();
-        void addPerson(char* child_name, char* father_name, char* mother_name);
+        void addPerson(const char* child_name, const char* father_name, const char* mother_name);
         void insertIntoList(Person *newPerson);
-        void printLineage(char* person);
+        void printLineage(const char* person);
+
 };
 #endif // __PERSONLIST_H__

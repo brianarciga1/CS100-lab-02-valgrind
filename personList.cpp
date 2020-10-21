@@ -1,26 +1,27 @@
 #include "personList.h"
-#include <iostream>
-#include <string.h>
+#include<iostream>
+#include<string.h>
 
 using std::cout;
 using std::endl;
 
 PersonList::PersonList(){
-    capacity = 2;
+    capacity = 20;
     numPeople = 0;
     theList = new Person*[capacity];
 }
 
 PersonList::~PersonList(){
-    delete [] theList;
+    for(int i = 0; i< numPeople; i++) {
+	    delete theList[i];
+          }
+	delete[] theList;
 }
 
-void PersonList::addPerson(char* child_name, char* father_name, char* mother_name){
+void PersonList::addPerson(const char* child_name, const char* father_name, const char* mother_name){
     Person *father = 0;
     Person *mother = 0;
-    
-    // try to find the three names in the theList
-    for(int i = 0; i < numPeople; i++){
+for(int i = 0; i < numPeople; i++){
         if(!strcmp(theList[i]->getName(), child_name)){
             cout << "ERROR: " << child_name << " already has parents!!!";
             return;
@@ -30,18 +31,16 @@ void PersonList::addPerson(char* child_name, char* father_name, char* mother_nam
             mother = theList[i];
         }
     }
-   
+
     if(father == 0){
-      // father_name is not in the theList so create a new person
-      father = new Person(father_name, 0, 0);
+ father = new Person(father_name, 0, 0);
       insertIntoList(father);
     }
-    if(mother == 0){
-      // mother_name is not in the theList so create a new person
+if(mother == 0){
       mother = new Person(mother_name, 0, 0);
       insertIntoList(mother);
     }
-    Person *newChild = new Person(child_name, father, mother);
+ Person *newChild = new Person(child_name, father, mother);
     insertIntoList(newChild);
     father->addChild(newChild);
     mother->addChild(newChild);
@@ -53,7 +52,7 @@ void PersonList::insertIntoList(Person *newPerson){
     theList[numPeople++] = newPerson;
 }
 
-void PersonList::printLineage(char* person){
+void PersonList::printLineage(const char* person){
     for(int i = 0; i < numPeople; i++) {
         if(!strcmp(theList[i]->getName(), person)){
             theList[i]->printAncestors();
@@ -63,3 +62,4 @@ void PersonList::printLineage(char* person){
     }
     cout << endl << person << " is not in the list!" << endl;
 }
+
