@@ -10,7 +10,7 @@ Person::Person(const char *name, Person* father, Person* mother){
     strcpy(this->name, name);
     this->father = father;
     this->mother = mother;
-    capacity = 2;
+    capacity = 1;
     numChildren = 0;
     children = new Person*[capacity];
 }
@@ -72,6 +72,6 @@ void expand(Person ***t, int *MAX){
     Person **temp = new Person*[2 * *MAX];
     memcpy(temp, *t, *MAX * sizeof(**t));
     *MAX *=2;
-   // delete[] *t;   // change
+   delete[] *t;   // change
     *t = temp;
 }

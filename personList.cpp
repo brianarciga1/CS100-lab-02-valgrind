@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 PersonList::PersonList(){
-    capacity = 20;
+    capacity = 2;
     numPeople = 0;
     theList = new Person*[capacity];
 }
